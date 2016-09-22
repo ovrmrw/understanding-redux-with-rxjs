@@ -23,7 +23,7 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
 
   console.log('zone name:', Zone.current.name); /* OUTPUT> zone name: myZone */
 
-  const appState: AppState = {
+  const initialState: AppState = {
     increment: Promise.resolve({
       counter: 0
     })
@@ -33,7 +33,7 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
 
 
   const dispatcher$ = new Subject<Action>();
-  const provider$ = new BehaviorSubject<AppState>(appState);
+  const provider$ = new BehaviorSubject<AppState>(initialState);
 
 
   Observable // ReducerContainer
@@ -50,9 +50,9 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
         } else {
           return state;
         }
-      }, appState.increment),
+      }, initialState.increment),
       (increment) => {
-        return { increment } as AppState
+        return Object.assign({}, initialState, { increment }) as AppState;
       }
     ])
     .subscribe(appState => {
