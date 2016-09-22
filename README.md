@@ -4,6 +4,7 @@ Understanding Redux concept with RxJS. This is an easy example to make sense for
 ---
 
 mergeMap ver. -> [redux-rxjs.ts](https://github.com/ovrmrw/understanding-redux-with-rxjs/blob/master/redux-rxjs.ts)
+
 switchMap ver. -> [redux-rxjs.switchMap.ts](https://github.com/ovrmrw/understanding-redux-with-rxjs/blob/master/redux-rxjs.switchMap.ts)
 
 |Compiler|version|
