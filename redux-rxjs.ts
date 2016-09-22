@@ -8,14 +8,25 @@ class IncrementAction {
   constructor(public num: number) { }
 }
 
-type Action = IncrementAction | null;
+class OtherAction {
+  constructor() { }
+}
+
+type Action = IncrementAction | OtherAction;
+
 
 interface IncrementState {
   counter: number;
 }
 
+interface OtherState {
+  foo: string;
+  bar: number;
+}
+
 interface AppState {
-  increment: Promise<IncrementState>
+  increment: Promise<IncrementState>;
+  other?: OtherState;
 }
 
 
@@ -51,8 +62,8 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
           return state;
         }
       }, initialState.increment),
-      (increment) => {
-        return Object.assign({}, initialState, { increment }) as AppState;
+      (increment) => { // projection
+        return Object.assign<{}, AppState, {}>({}, initialState, { increment });
       }
     ])
     .subscribe(appState => {
