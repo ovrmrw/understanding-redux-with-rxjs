@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import 'zone.js/dist/zone-node';
+import * as lodash from 'lodash';
 import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
 declare const Zone: any;
 
@@ -76,7 +77,7 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
     .mergeMap<IncrementState>(state => {
       return Observable.fromPromise(state);
     })
-    .distinctUntilChanged()
+    .distinctUntilChanged((oldValue, newValue) => lodash.isEqual(oldValue, newValue))
     .subscribe(state => {
       counter = state.counter;
       console.log('counter:', counter); /* (First time) OUTPUT> counter: 0 */
@@ -85,6 +86,8 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
 
   dispatcher$.next(new IncrementAction(1)); /* OUTPUT> counter: 1 */
   dispatcher$.next(new IncrementAction(1)); /* OUTPUT> counter: 2 */
+  dispatcher$.next(new IncrementAction(0)); /* OUTPUT> (nothing) */
   dispatcher$.next(new IncrementAction(1)); /* OUTPUT> counter: 3 */
+  dispatcher$.next(new IncrementAction(-1)); /* OUTPUT> counter: 2 */
 
 });
