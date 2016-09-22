@@ -63,7 +63,7 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
           return state;
         }
       }, initialState.increment),
-      (increment) => { // projection
+      (increment): AppState => { // projection
         return Object.assign<{}, AppState, {}>({}, initialState, { increment });
       }
     ])
@@ -86,7 +86,7 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
 
   dispatcher$.next(new IncrementAction(1)); /* OUTPUT> counter: 1 */
   dispatcher$.next(new IncrementAction(1)); /* OUTPUT> counter: 2 */
-  dispatcher$.next(new IncrementAction(0)); /* OUTPUT> (nothing) */
+  dispatcher$.next(new IncrementAction(0)); /* OUTPUT> (restricted) */
   dispatcher$.next(new IncrementAction(1)); /* OUTPUT> counter: 3 */
   dispatcher$.next(new IncrementAction(-1)); /* OUTPUT> counter: 2 */
 
