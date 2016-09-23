@@ -84,10 +84,10 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
     });
 
 
-  dispatcher$.next(new IncrementAction(1)); /* OUTPUT> counter: 1 */
-  dispatcher$.next(new IncrementAction(1)); /* OUTPUT> counter: 2 */
-  dispatcher$.next(new IncrementAction(0)); /* OUTPUT> (restricted) */
-  dispatcher$.next(new IncrementAction(1)); /* OUTPUT> counter: 3 */
+  dispatcher$.next(new IncrementAction(1));  /* OUTPUT> counter: 1 */
+  dispatcher$.next(new IncrementAction(1));  /* OUTPUT> counter: 2 */
+  dispatcher$.next(new IncrementAction(0));  /* OUTPUT> (restricted) */
+  dispatcher$.next(new IncrementAction(1));  /* OUTPUT> counter: 3 */
   dispatcher$.next(new IncrementAction(-1)); /* OUTPUT> counter: 2 */
 
 });

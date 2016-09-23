@@ -84,17 +84,17 @@ Zone.current.fork({ name: 'myZone' }).run(async () => {
     });
 
 
-  await wait(10);                            /* OUTPUT> counter: 0 */
+  await wait(10);                       /* OUTPUT> counter: 0 */
   dispatcher$.next(new IncrementAction(1));
   dispatcher$.next(new IncrementAction(1));
   dispatcher$.next(new IncrementAction(1));
-  await wait(10);                            /* OUTPUT> counter: 3 */
+  await wait(10);                       /* OUTPUT> counter: 3 */
   dispatcher$.next(new IncrementAction(0));
-  await wait(10);                            /* OUTPUT> (restricted) */
+  await wait(10);                       /* OUTPUT> (restricted) */
   dispatcher$.next(new IncrementAction(1));
-  await wait(10);                            /* OUTPUT> counter: 4 */
+  await wait(10);                       /* OUTPUT> counter: 4 */
   dispatcher$.next(new IncrementAction(-1)); 
-                                             /* OUTPUT> counter: 3 */
+                                        /* OUTPUT> counter: 3 */
 });
 
 
