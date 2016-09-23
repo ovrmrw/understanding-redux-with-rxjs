@@ -28,7 +28,7 @@ $ npm install
 $ npm run ts
 ```
 
-### Run merveMap ver. (js files after build)
+### Run mergeMap ver. (js files after build)
 ```
 $ npm start
 ```
