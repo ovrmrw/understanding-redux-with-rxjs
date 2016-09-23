@@ -31,7 +31,7 @@ interface AppState {
 }
 
 
-Zone.current.fork({ name: 'myZone' }).run(() => {
+Zone.current.fork({ name: 'myZone' }).runGuarded(() => {
 
   console.log('zone name:', Zone.current.name); /* OUTPUT> zone name: myZone */
 
@@ -50,7 +50,7 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
 
   Observable // ReducerContainer
     .zip<AppState>(...[
-      dispatcher$.scan<Promise<IncrementState>>((state, action) => {
+      dispatcher$.scan<Promise<IncrementState>>((state, action) => { // Reducer
         if (action instanceof IncrementAction) {
           return new Promise<IncrementState>(resolve => {
             setTimeout(() => {

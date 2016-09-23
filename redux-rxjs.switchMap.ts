@@ -31,7 +31,7 @@ interface AppState {
 }
 
 
-Zone.current.fork({ name: 'myZone' }).run(async () => {
+Zone.current.fork({ name: 'myZone' }).runGuarded(async () => {
 
   console.log('zone name:', Zone.current.name); /* OUTPUT> zone name: myZone */
 
@@ -50,7 +50,7 @@ Zone.current.fork({ name: 'myZone' }).run(async () => {
 
   Observable // ReducerContainer
     .zip<AppState>(...[
-      dispatcher$.scan<Promise<IncrementState>>((state, action) => {
+      dispatcher$.scan<Promise<IncrementState>>((state, action) => { // Reducer
         if (action instanceof IncrementAction) {
           return new Promise<IncrementState>(resolve => {
             setTimeout(() => {
@@ -93,13 +93,12 @@ Zone.current.fork({ name: 'myZone' }).run(async () => {
   await wait(10);                          /* OUTPUT> (restricted) */
   dispatcher$.next(new IncrementAction(1));
   await wait(10);                          /* OUTPUT> counter: 4 */
-  dispatcher$.next(new IncrementAction(-1)); 
-                                           /* OUTPUT> counter: 3 */
+  dispatcher$.next(new IncrementAction(-1));
+  ;                                        /* OUTPUT> counter: 3 */
+
 });
 
 
 function wait(ms: number): Promise<void> {
-  return new Promise<void>(resolve => {
-    setTimeout(() => resolve(), ms);
-  });
+  return new Promise<void>(resolve => setTimeout(resolve, ms));
 }
