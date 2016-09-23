@@ -23,14 +23,19 @@ switchMap ver. -> [redux-rxjs.switchMap.ts](https://github.com/ovrmrw/understand
 $ npm install
 ```
 
-### Run (ts files directly)
+### Run mergeMap ver. (ts files directly)
 ```
 $ npm run ts
-or
-$ npm run ts:alt
 ```
 
-### Run (js files after build)
+### Run merveMap ver. (js files after build)
 ```
 $ npm start
+```
+
+---
+
+### Run switchMap ver.
+```
+$ npm run switchmap
 ```

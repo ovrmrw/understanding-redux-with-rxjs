@@ -14,7 +14,8 @@
     "build": "npm run tsc && npm run babel",
     "build:w": "concurrently -k \"npm run tsc:w\" \"npm run babel:w\" ",
     "prestart": "npm run build",
-    "start": "node dest/redux-rxjs.js"
+    "start": "node dest/redux-rxjs.js",
+    "switchmap": "ts-babel-node redux-rxjs.switchMap.ts"
   },
   "keywords": [],
   "author": "",
