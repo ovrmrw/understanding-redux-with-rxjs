@@ -44,8 +44,8 @@ Zone.current.fork({ name: 'myZone' }).run(() => {
   let counter: number;
 
 
-  const dispatcher$ = new Subject<Action>();
-  const provider$ = new BehaviorSubject<AppState>(initialState);
+  const dispatcher$ = new Subject<Action>(); // Dispatcher
+  const provider$ = new BehaviorSubject<AppState>(initialState); // Provider
 
 
   Observable // ReducerContainer
