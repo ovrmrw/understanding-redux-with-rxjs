@@ -8,7 +8,6 @@ import lodash from 'lodash';
   pure: false
 })
 export class AsyncStatePipe<T> implements PipeTransform, OnDestroy {
-  private isSubscriptionCreated: boolean;
   private subscription: Subscription;
   private latestValue: T | null = null;
 
