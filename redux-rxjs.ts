@@ -64,7 +64,7 @@ Zone.current.fork({ name: 'myZone' }).runGuarded(() => {
         }
       }, initialState.increment),
       (increment): AppState => { // projection
-        return Object.assign<{}, AppState, {}>({}, initialState, { increment });
+        return Object.assign<{}, AppState, {}>({}, initialState, { increment }); // always create new state object!
       }
     ])
     .subscribe(appState => {
