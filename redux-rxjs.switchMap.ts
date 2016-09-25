@@ -36,7 +36,7 @@ Zone.current.fork({ name: 'myZone' }).runGuarded(async () => {
   console.log('zone name:', Zone.current.name); /* OUTPUT> zone name: myZone */
 
   const initialState: AppState = {
-    increment: Promise.resolve({
+    increment: Promise.resolve<IncrementState>({
       counter: 0
     })
   };
