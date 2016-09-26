@@ -75,7 +75,7 @@ Zone.current.fork({ name: 'myZone' }).runGuarded(async () => {
   provider$
     .map<Promise<IncrementState>>(appState => appState.increment)
     .switchMap<IncrementState>(state => Observable.fromPromise(state)) // resolve async states.
-    .map<IncrementState>(state => Object.assign<{}, IncrementState>({}, state)) // make states immutable.
+    .map<IncrementState>(state => lodash.cloneDeep(state)) // make states immutable.
     .distinctUntilChanged((oldValue, newValue) => lodash.isEqual(oldValue, newValue)) // restrict same values to through.
     .subscribe(state => {
       counter = state.counter;
