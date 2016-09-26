@@ -54,9 +54,7 @@ Zone.current.fork({ name: 'myZone' }).runGuarded(() => {
         if (action instanceof IncrementAction) {
           return new Promise<IncrementState>(resolve => {
             setTimeout(() => {
-              state.then(s => {
-                resolve({ counter: s.counter + action.num });
-              });
+              state.then(s => resolve({ counter: s.counter + action.num }));
             }, 10);
           });
         } else {

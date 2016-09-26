@@ -19,8 +19,7 @@ export class AsyncStatePipe<T> implements PipeTransform, OnDestroy {
     }
   }
 
-  transform(observable: Observable<T>, debugMode: boolean = false): T | null {
-    if (debugMode) { console.log('AsyncStatePipe: transform() is called.'); }
+  transform(observable: Observable<T>): T | null {
     if (!this.subscription) {
       // 1回目の実行時にここを通る。      
       this.subscription = observable
@@ -28,11 +27,9 @@ export class AsyncStatePipe<T> implements PipeTransform, OnDestroy {
         .subscribe(state => {
           this.latestValue = state;
           this.cd.markForCheck();
-          if (debugMode) { console.log('AsyncStatePipe: markForCheck() is called.'); }
         }, err => {
           console.error(err);
         });
-      if (debugMode) { console.log('AsyncStatePipe: Subscription is created.', observable); }
     }
     return this.latestValue;
   }
